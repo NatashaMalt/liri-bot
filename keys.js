@@ -1,5 +1,5 @@
-// Node module imports needed to run the functions
-	var fs = require("fs"); //reads and writes files
+
+	var fs = require("fs"); 
 	var request = require("request");
 	var keys = require("./keys.js");
 	var twitter = require("twitter");
@@ -66,7 +66,7 @@
 		client.get("status/user_timeline/", params, function(error, data, response){
 			if (!error) {
 				for(var i = 0; i < data.length; i++) {
-					//console.log(response); // Show the full response in the terminal
+					
 					var twitterResults = 
 					"@" + data[i].user.screen_name + ": " + 
 					data[i].text + "\r\n" + 
@@ -100,7 +100,7 @@
 						"Preview Url: " + songInfo[i].preview_url + "\r\n" + 
 						"------------------------------ " + i + " ------------------------------" + "\r\n";
 						console.log(spotifyResults);
-						log(spotifyResults); // calling log function
+						log(spotifyResults); 
 					}
 				}
 			}	else {
