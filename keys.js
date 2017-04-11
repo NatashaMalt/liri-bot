@@ -5,14 +5,13 @@
 	var twitter = require("twitter");
 	var spotify = require ("spotify");
 	var liriArgument = process.argv[2];
-// ---------------------------------------------------------------------------------------------------------------
-	// Possible commands for this liri app
+
 	switch(liriArgument) {
 		case "my-tweets": myTweets(); break;
 		case "spotify-this-song": spotifyThisSong(); break;
 		case "movie-this": movieThis(); break;
 		case "do-what-it-says": doWhatItSays(); break;
-		// Instructions displayed in terminal to the user
+
 		default: console.log("\r\n" +"Try typing one of the following commands after 'node liri.js' : " +"\r\n"+
 			"1. my-tweets 'any twitter name' " +"\r\n"+
 			"2. spotify-this-song 'any song name' "+"\r\n"+
@@ -20,9 +19,7 @@
 			"4. do-what-it-says."+"\r\n"+
 			"Be sure to put the movie or song name in quotation marks if it's more than one word.");
 	};
-// ---------------------------------------------------------------------------------------------------------------
-// Functions
-	// Movie function, uses the Request module to call the OMDB api
+
 	function movieThis(){
 		var movie = process.argv[3];
 		if(!movie){
@@ -30,9 +27,9 @@
 		}
 		params = movie
 		request("http://www.omdbapi.com/?t=" + params + "&y=&plot=short&r=json&tomatoes=true", function (error, response, body) {
-			if (!error && response.statusCode == 200) {
+			if (!error response.statusCode == 200) {
 				var movieObject = JSON.parse(body);
-				//console.log(movieObject); // Show the text in the terminal
+				
 				var movieResults =
 				"------------------------------ begin ------------------------------" + "\r\n"
 				"Title: " + movieObject.Title+"\r\n"+
@@ -46,7 +43,7 @@
 				"Rotten Tomatoes URL: " + movieObject.tomatoURL + "\r\n" + 
 				"------------------------------ fin ------------------------------" + "\r\n";
 				console.log(movieResults);
-				log(movieResults); // calling log function
+				log(movieResults); 
 			} else {
 				console.log("Error :"+ error);
 				return;
@@ -62,11 +59,11 @@
 			access_token_secret: keys.twitterKeys.access_token_secret, 
 		});
 		var twitterUsername = process.argv[3];
-		if(!twitterUsername){
+		if(twitterUsername){
 			twitterUsername = "Natasha V.E.L Malt";
 		}
 		params = {screen_name: twitterUsername};
-		client.get("statuses/user_timeline/", params, function(error, data, response){
+		client.get("status/user_timeline/", params, function(error, data, response){
 			if (!error) {
 				for(var i = 0; i < data.length; i++) {
 					//console.log(response); // Show the full response in the terminal
@@ -76,7 +73,7 @@
 					data[i].created_at + "\r\n" + 
 					"------------------------------ " + i + " ------------------------------" + "\r\n";
 					console.log(twitterResults);
-					log(twitterResults); // calling log function
+					log(twitterResults); 
 				}
 			}  else {
 				console.log("Error :"+ error);
